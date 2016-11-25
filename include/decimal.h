@@ -475,7 +475,8 @@ public:
     /// \param[in] afterValue value after decimal point multiplied by 10^prec
     /// \result Returns *this
     decimal &pack(int64 beforeValue, int64 afterValue) {
-      if (Prec > 0) {
+      constexpr auto has_prec = Prec > 0;
+      if (has_prec) {
         m_value = beforeValue * DecimalFactor<Prec>::value;
         m_value += (afterValue % DecimalFactor<Prec>::value);
        } else
